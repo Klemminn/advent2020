@@ -53,10 +53,13 @@ const logSum = (array, sumToMatch, numItems) => {
         let checkIndex = 0
         while (true) {
             const checkNum = indexes[checkIndex]
-            if (checkIndex === numItems) return -1
+            if (checkIndex === numItems) {
+                console.log('No combination matches the request')
+                return
+            }
             if (checkNum > 0) {
                 indexes[checkIndex] -= 1
-                return setImmediate(() => recurs(indexes))
+                return process.nextTick(() => recurs(indexes))
             } else {
                 indexes[checkIndex] = indexes[checkIndex + 1] - 1
                 checkIndex += 1
@@ -65,5 +68,4 @@ const logSum = (array, sumToMatch, numItems) => {
     }
     return recurs(initialIndexes)
 }
-
 logSum(input, 2020, 3)
