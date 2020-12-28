@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const input = fs.readFileSync('day1input.txt', 'utf8').split('\n').map((str) => Number(str));
+input.pop()
 
 const findDoubleSum = (array, sumToMatch) => {
     let first

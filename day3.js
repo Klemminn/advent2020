@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const input = fs.readFileSync('day3input.txt', 'utf8').split('\n');
+input.pop()
 
 const countTrees = (array) => {
     array.shift()

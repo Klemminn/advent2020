@@ -1,15 +1,11 @@
 const fs = require('fs');
 
-const input = fs.readFileSync('day5input.txt', 'utf8').split('\n');
+const input = fs.readFileSync('day5input.txt', 'utf8').split('\n').filter((l) => l);
 input.pop()
 
-const reducer = (sequence, lowerSymbol, upperLimit) => {
-    const sequenceSplit = sequence.split('')
-    return sequenceSplit.reduce((previous, current) => {
-        const splitNumber = Math.abs(Math.floor((previous[0] - previous[1]) / 2))
-        if (current === lowerSymbol) return [previous[0], previous[1] - splitNumber]
-        return [previous[0] + splitNumber, previous[1]]
-    }, [0, upperLimit])[0]
+const reducer = (sequence, lowerSymbol) => {
+    const sequenceSplit = sequence.split('').map((s) => s === lowerSymbol ? 0 : 1).join('')
+    return parseInt(sequenceSplit, 2)
 }
 
 const getSeatId = (row, seat) => {
@@ -19,13 +15,13 @@ const getSeatId = (row, seat) => {
 const parseSeat = (sequence) => {
     const rowSequence = sequence.substr(0, 7)
     const seatSequence = sequence.substr(7)
-    const row = reducer(rowSequence, 'F', 127)
-    const seat = reducer(seatSequence, 'L', 7)
+    const row = reducer(rowSequence, 'F')
+    const seat = reducer(seatSequence, 'L')
     const seatId = getSeatId(row, seat)
-    return { row, seat, seatId }
+    return seatId
 }
 
-const getSeatIds = (array) => array.map((sequence) => parseSeat(sequence).seatId)
+const getSeatIds = (array) => array.map((sequence) => parseSeat(sequence))
 
 const getMaxSeatId = (array) => {
     return Math.max(...getSeatIds(array))

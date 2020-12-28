@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const input = fs.readFileSync('day2input.txt', 'utf8').split('\n');
+input.pop()
 
 const countValid = (array) => {
     const parsed = array.map((p) => p.replace(':', '').split(' '))

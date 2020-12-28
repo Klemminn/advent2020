@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const input = fs.readFileSync('day4input.txt', 'utf8').split('\n\n');
+input.pop()
 
 const requiredFields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
 
